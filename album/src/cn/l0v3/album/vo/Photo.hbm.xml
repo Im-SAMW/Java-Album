@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC   
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="cn.l0v3.album.vo">
+
+    <class name="Photo" table="photo">
+        <id name="photoID" type="integer">
+            <generator class="increment"/>
+        </id>
+        <property name="photoName" type="string"/>
+        <property name="photoImage" type="string"/>
+        <property name="alt" type="string"/>
+        <many-to-one name="user" class="User" column="userID" cascade="none"></many-to-one>
+        <list name="images" table="image" inverse="true" cascade="save-update" lazy="false">
+			<key column="photoID"/>
+			<list-index column="imageID" />
+			<one-to-many class="Image"/>
+		</list>
+    </class>
+
+</hibernate-mapping>
